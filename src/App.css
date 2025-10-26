@@ -186,6 +186,29 @@ nav a:focus{
 
 a:focus, button:focus { outline: 3px solid rgba(0,112,243,0.18); outline-offset:2px; }
 
+.loading-screen{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:48px 12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+  border-radius:8px;
+}
+.loading-spinner{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:6px solid rgba(0,0,0,0.08);
+  border-top-color:var(--accent);
+  animation:spin 0.9s linear infinite;
+}
+.loading-text{
+  font-weight:600;
+  color:var(--muted);
+}
+
 @media (max-width:720px){
   .hero { padding: 2rem 0.5rem; }
   .card-img{ height:160px; }

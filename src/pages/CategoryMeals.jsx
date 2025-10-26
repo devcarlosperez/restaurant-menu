@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import MenuItem from "../components/MenuItem";
 import { getMealsByCategory } from "../api/api";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function CategoryMeals() {
   const { categoryName } = useParams();
@@ -37,7 +38,7 @@ export default function CategoryMeals() {
       <NavBar />
       <main style={{ padding: "1rem", maxWidth: 1100, margin: "0 auto" }}>
         <h1>{categoryName}</h1>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <LoadingScreen />}
         {error && <p className="error">Error: {error}</p>}
         {!isLoading && !error && (
           <section className="grid">

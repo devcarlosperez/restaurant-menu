@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import LoadingScreen from "../components/LoadingScreen";
 
 function Categories() {
   const [cats, setCats] = useState([]);
@@ -35,7 +36,7 @@ function Categories() {
       <NavBar />
       <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto" }}>
         <h1>Categories</h1>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <LoadingScreen />}
         {error && <p className="error">Error: {error}</p>}
         {!isLoading && !error && (
           <div className="grid">

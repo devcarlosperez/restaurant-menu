@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { getMealById } from "../api/api";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function MealDetail() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ export default function MealDetail() {
     <>
       <NavBar />
       <main style={{ padding: "1rem", maxWidth: 900, margin: "0 auto" }}>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <LoadingScreen />}
         {error && <p className="error">Error: {error}</p>}
         {!isLoading && !error && !meal && <p>Meal not found</p>}
         {!isLoading && !error && meal && (

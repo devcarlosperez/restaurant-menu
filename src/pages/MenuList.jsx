@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import MenuItem from "../components/MenuItem";
 import { getAllMeals } from "../api/api";
+import LoadingScreen from "../components/LoadingScreen";
 
 function MenuList() {
   const [items, setItems] = useState([]);
@@ -36,7 +37,7 @@ function MenuList() {
       <main>
         <h1>Menu</h1>
 
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <LoadingScreen />}
         {error && <p className="error">Error: {error}</p>}
 
         {!isLoading && !error && (
