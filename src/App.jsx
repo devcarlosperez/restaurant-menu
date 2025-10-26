@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import MenuList from './pages/MenuList'
 import Categories from './pages/Categories'
+import CategoryMeals from './pages/CategoryMeals'
+import MealDetail from './pages/MealDetail'
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/menu' element={<MenuList/>}/>
         <Route path='/categories' element={<Categories/>}/>
+        <Route path='/categories/:categoryName' element={<CategoryMeals/>}/>
+        <Route path='/meal/:id' element={<MealDetail/>}/>
       </Routes>
     </BrowserRouter>
   )

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 
-export default function MenuItem({ item }) {
+export default function MenuItem({ id, name, thumb, category, price }) {
   return (
     <article className="card">
-      <Link to={`/meal/${item.id}`}>
-        <img src={item.thumb} alt={item.name} className="card-img" />
-        <h3 className="card-title">{item.name}</h3>
+      <Link to={`/meal/${id}`}>
+        <img src={thumb} alt={name} className="card-img" />
+        <h3 className="card-title">{name}</h3>
       </Link>
-      <p className="card-category">{item.category}</p>
-      <p className="card-price">${item.price.toFixed(2)}</p>
+      <p className="card-category">{category}</p>
+      <p className="card-price">${price.toFixed(2)}</p>
     </article>
   )
 }

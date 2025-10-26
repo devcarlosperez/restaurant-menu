@@ -37,7 +37,21 @@ function normalizeMeal(m) {
     category: m.strCategory || 'General',
     thumb: m.strMealThumb,
     price: randomPrice(),
+    instructions: m.strInstructions || '',
+    area: m.strArea || '',
+    tags: m.strTags ? m.strTags.split(',').map(t => t.trim()) : [],
+    ingredients: extractIngredients(m),
   }
+}
+
+function extractIngredients(m) {
+  const items = []
+  for (let i = 1; i <= 20; i++) {
+    const ingredient = (m[`strIngredient${i}`] || '').trim()
+    const measure = (m[`strMeasure${i}`] || '').trim()
+    if (ingredient) items.push({ ingredient, measure })
+  }
+  return items
 }
 
 function randomPrice() {

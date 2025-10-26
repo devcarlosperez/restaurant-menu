@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import MenuItem from "../components/MenuItem";
-import { getAllMeals } from "../api/api";
+import { getMealsByCategory } from "../api/api";
 
-function MenuList() {
+export default function CategoryMeals() {
+  const { categoryName } = useParams();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,12 +17,12 @@ function MenuList() {
       try {
         setIsLoading(true);
         setError(null);
-        const meals = await getAllMeals();
+        const meals = await getMealsByCategory(categoryName); // src/api/api.js -> getMealsByCategory
         if (!mounted) return;
         setItems(meals);
       } catch (err) {
         if (!mounted) return;
-        setError(err.message || "Error");
+        setError(err?.message || "Error al cargar categoría");
       } finally {
         if (!mounted) return;
         setIsLoading(false);
@@ -28,20 +30,18 @@ function MenuList() {
     }
     load();
     return () => { mounted = false };
-  }, []);
+  }, [categoryName]);
 
   return (
     <>
       <NavBar />
-      <main>
-        <h1>Menu</h1>
-
+      <main style={{ padding: "1rem", maxWidth: 1100, margin: "0 auto" }}>
+        <h1>{categoryName}</h1>
         {isLoading && <p>Loading...</p>}
         {error && <p className="error">Error: {error}</p>}
-
         {!isLoading && !error && (
           <section className="grid">
-            {items.map(item => <MenuItem key={item.id} {...item} />)}
+            {items.map(i => <MenuItem key={i.id} item={i} />)}
           </section>
         )}
       </main>
@@ -49,5 +49,3 @@ function MenuList() {
     </>
   );
 }
-
-export default MenuList;
