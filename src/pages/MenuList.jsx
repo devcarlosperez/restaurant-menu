@@ -1,14 +1,53 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import MenuItem from "../components/MenuItem";
+import { getAllMeals } from "../api/api";
 
 function MenuList() {
-  return(
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const meals = await getAllMeals();
+        if (!mounted) return;
+        setItems(meals);
+      } catch (err) {
+        if (!mounted) return;
+        setError(err.message || "Error");
+      } finally {
+        if (!mounted) return;
+        setIsLoading(false);
+      }
+    }
+    load();
+    return () => { mounted = false };
+  }, []);
+
+  return (
     <>
-      <NavBar/>
-      <p>This is my MenuList page</p>
-      <Footer/>
+      <NavBar />
+      <main>
+        <h1>Menu</h1>
+
+        {isLoading && <p>Loading...</p>}
+        {error && <p className="error">Error: {error}</p>}
+
+        {!isLoading && !error && (
+          <section className="grid">
+            {items.map(item => <MenuItem key={item.id} item={item} />)}
+          </section>
+        )}
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
 
 export default MenuList;
