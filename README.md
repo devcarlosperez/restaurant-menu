@@ -10,7 +10,7 @@ A single-page React application that displays a restaurant menu using TheMealDB 
 - Navigation between Home, Menu and Categories.
 - Loading and error states.
 
-## Demo pages
+## Restaurant pages
 
 - Home: `/`  
 - Menu list: `/menu`  
