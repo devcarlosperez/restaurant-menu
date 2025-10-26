@@ -41,7 +41,7 @@ export default function CategoryMeals() {
         {error && <p className="error">Error: {error}</p>}
         {!isLoading && !error && (
           <section className="grid">
-            {items.map(i => <MenuItem key={i.id} item={i} />)}
+            {items.map(i => <MenuItem key={i.id} {...i} />)}
           </section>
         )}
       </main>

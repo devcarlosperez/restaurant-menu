@@ -126,6 +126,11 @@ nav a:focus{
   align-items:start;
 }
 
+.grid a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card{
   background:var(--card);
   border-radius:var(--radius);
