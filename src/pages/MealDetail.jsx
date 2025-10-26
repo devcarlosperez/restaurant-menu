@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { getMealById } from "../api/api";
@@ -21,7 +21,7 @@ export default function MealDetail() {
         setMeal(m);
       } catch (err) {
         if (!mounted) return;
-        setError(err?.message || "Error al cargar el plato");
+        setError(err?.message || "Error loading meal");
       } finally {
         if (!mounted) return;
         setIsLoading(false);
@@ -35,10 +35,9 @@ export default function MealDetail() {
     <>
       <NavBar />
       <main style={{ padding: "1rem", maxWidth: 900, margin: "0 auto" }}>
-        <Link to="/menu">← Volver al menú</Link>
         {isLoading && <p>Loading...</p>}
         {error && <p className="error">Error: {error}</p>}
-        {!isLoading && !error && !meal && <p>No se encontró el plato</p>}
+        {!isLoading && !error && !meal && <p>Meal not found</p>}
         {!isLoading && !error && meal && (
           <article className="meal-detail">
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
@@ -49,7 +48,7 @@ export default function MealDetail() {
                 {meal.tags?.length > 0 && <p style={{ marginTop: 6 }}>Tags: {meal.tags.join(', ')}</p>}
                 <p style={{ fontWeight: 700, marginTop: 8 }}>€{meal.price.toFixed(2)}</p>
 
-                <h3 style={{ marginTop: 16 }}>Ingredientes</h3>
+                <h3 style={{ marginTop: 16 }}>Ingredients</h3>
                 <ul>
                   {meal.ingredients.map((it, idx) => (
                     <li key={idx}>{it.ingredient}{it.measure ? ` — ${it.measure}` : ''}</li>
@@ -60,7 +59,7 @@ export default function MealDetail() {
 
             {meal.instructions && (
               <>
-                <h2 style={{ marginTop: 20 }}>Preparación</h2>
+                <h2 style={{ marginTop: 20 }}>Preparation</h2>
                 <p style={{ whiteSpace: "pre-line", lineHeight: 1.5 }}>{meal.instructions}</p>
               </>
             )}

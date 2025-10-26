@@ -22,7 +22,7 @@ export default function CategoryMeals() {
         setItems(meals);
       } catch (err) {
         if (!mounted) return;
-        setError(err?.message || "Error al cargar categoría");
+        setError(err?.message || "Error loading category");
       } finally {
         if (!mounted) return;
         setIsLoading(false);

@@ -34,7 +34,7 @@ function Categories() {
     <>
       <NavBar />
       <main style={{ padding: 16, maxWidth: 1100, margin: "0 auto" }}>
-        <h1>Categorías</h1>
+        <h1>Categories</h1>
         {isLoading && <p>Loading...</p>}
         {error && <p className="error">Error: {error}</p>}
         {!isLoading && !error && (
